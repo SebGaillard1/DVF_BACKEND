@@ -20,13 +20,15 @@ public class CsvDataServiceImpl implements CsvDataService {
 
     public List<Transaction> readCsvData(String filePath) {
         List<Transaction> transactions = new ArrayList<>();
+        int maxLines = 100000; // Limite de lignes à lire
+        int lineCount = 0; // Compteur de lignes
 
         try (Reader reader = Files.newBufferedReader(Paths.get(filePath));
              CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build()) { // Skip header
 
             String[] nextRecord;
 
-            while ((nextRecord = csvReader.readNext()) != null) {
+            while ((nextRecord = csvReader.readNext()) != null && lineCount < maxLines) {
                 Transaction transaction = new Transaction();
 
                 transaction.setIdMutation(nextRecord[0]);
@@ -71,6 +73,8 @@ public class CsvDataServiceImpl implements CsvDataService {
                 transaction.setLatitude(nextRecord[39]);
 
                 transactions.add(transaction);
+
+                lineCount++; // Incrémenter le compteur de lignes après chaque lecture
             }
 
             transactions.stream().limit(10).forEach(System.out::println);

@@ -1,6 +1,7 @@
 package com.example.DVFPROJECT.controller;
 
 import com.example.DVFPROJECT.business.Transaction;
+import com.example.DVFPROJECT.dto.TransactionDTO;
 import com.example.DVFPROJECT.service.TransactionService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +19,13 @@ public class TransactionController {
     private TransactionService transactionService;
 
     @GetMapping
-    public ResponseEntity<List<Transaction>> getAllTransactions() {
-        List<Transaction> transactions = transactionService.findAllTransactions();
-        return ResponseEntity.ok(transactions);
+    public ResponseEntity<List<TransactionDTO>> getAllTransactions() {
+        List<TransactionDTO> transactionsDTO = transactionService.findAllTransactions();
+        return ResponseEntity.ok(transactionsDTO);
     }
-
     @GetMapping("/first10")
-    public ResponseEntity<List<Transaction>> getFirst10Transactions() {
-        List<Transaction> transactions = transactionService.findFirst10Transactions();
-        return ResponseEntity.ok(transactions);
+    public ResponseEntity<List<TransactionDTO>> getFirst10Transactions() {
+        List<TransactionDTO> transactionsDTO = transactionService.findFirst10Transactions();
+        return ResponseEntity.ok(transactionsDTO);
     }
 }
