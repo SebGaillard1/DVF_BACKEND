@@ -5,6 +5,8 @@ import com.example.DVFPROJECT.repository.TransactionRepository;
 import com.example.DVFPROJECT.service.CsvDataService;
 import com.example.DVFPROJECT.service.TransactionService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,5 +27,12 @@ public class TransactionServiceImpl implements TransactionService {
     public List<Transaction> findAllTransactions() {
         return repository.findAll();
     }
+
+    @Override
+    public List<Transaction> findFirst10Transactions() {
+        Pageable pageable = PageRequest.of(0, 10);
+        return repository.findAll(pageable).getContent();
+    }
+
     // ... autres méthodes du service
 }

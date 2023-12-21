@@ -8,4 +8,6 @@ public interface TransactionService {
     void loadCsvDataToDatabase(String filePath);
 
     List<Transaction> findAllTransactions();
+
+    List<Transaction> findFirst10Transactions();
 }
