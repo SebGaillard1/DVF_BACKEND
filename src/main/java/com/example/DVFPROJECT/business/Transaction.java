@@ -55,8 +55,8 @@ public class Transaction {
     private String codeNatureCultureSpeciale;
     private String natureCultureSpeciale;
     private String surfaceTerrain;
-    private String longitude;
-    private String latitude;
+    private Double longitude;
+    private Double latitude;
 
     @Override
     public String toString() {

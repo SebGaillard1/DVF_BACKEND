@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -26,6 +27,15 @@ public class TransactionController {
     @GetMapping("/first10")
     public ResponseEntity<List<TransactionDTO>> getFirst10Transactions() {
         List<TransactionDTO> transactionsDTO = transactionService.findFirst10Transactions();
+        return ResponseEntity.ok(transactionsDTO);
+    }
+
+    @GetMapping("/radius")
+    public ResponseEntity<List<TransactionDTO>> getTransactionsInRadius(
+            @RequestParam double latitude,
+            @RequestParam double longitude,
+            @RequestParam double radius) {
+        List<TransactionDTO> transactionsDTO = transactionService.findTransactionsInRadius(latitude, longitude, radius);
         return ResponseEntity.ok(transactionsDTO);
     }
 }

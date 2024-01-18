@@ -42,5 +42,10 @@ public class TransactionServiceImpl implements TransactionService {
                 .map(mapper::toDto)
                 .collect(Collectors.toList());
     }
-    // ... autres méthodes du service
+
+    @Override
+    public List<TransactionDTO> findTransactionsInRadius(double latitude, double longitude, double radius) {
+        List<Transaction> transactions = repository.findTransactionsInRadius(latitude, longitude, radius);
+        return transactions.stream().map(mapper::toDto).collect(Collectors.toList());
+    }
 }

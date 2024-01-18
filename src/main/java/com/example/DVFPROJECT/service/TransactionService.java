@@ -11,4 +11,6 @@ public interface TransactionService {
     List<TransactionDTO> findAllTransactions();
 
     List<TransactionDTO> findFirst10Transactions();
+
+    List<TransactionDTO> findTransactionsInRadius(double latitude, double longitude, double radius);
 }

@@ -69,8 +69,13 @@ public class CsvDataServiceImpl implements CsvDataService {
                 transaction.setCodeNatureCultureSpeciale(nextRecord[35]);
                 transaction.setNatureCultureSpeciale(nextRecord[36]);
                 transaction.setSurfaceTerrain(nextRecord[37]);
-                transaction.setLongitude(nextRecord[38]);
-                transaction.setLatitude(nextRecord[39]);
+                try {
+                    transaction.setLongitude(Double.parseDouble(nextRecord[38]));
+                    transaction.setLatitude(Double.parseDouble(nextRecord[39]));
+                } catch (NumberFormatException e) {
+                    // Gérer l'exception si la conversion échoue
+                    // Par exemple, vous pouvez définir une valeur par défaut ou ignorer la transaction
+                }
 
                 transactions.add(transaction);
 
