@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+@EnableScheduling
 public class DvfProjectApplication implements CommandLineRunner {
 	@Autowired
 	private TransactionService transactionService;
@@ -18,8 +20,6 @@ public class DvfProjectApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		String filePath = "full.csv";
-		transactionService.loadCsvDataToDatabase(filePath);
 	}
 
 }

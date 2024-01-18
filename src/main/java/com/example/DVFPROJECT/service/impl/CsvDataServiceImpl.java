@@ -2,10 +2,8 @@ package com.example.DVFPROJECT.service.impl;
 
 import com.example.DVFPROJECT.business.Transaction;
 import com.example.DVFPROJECT.service.CsvDataService;
-import com.example.DVFPROJECT.service.TransactionService;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.Reader;
@@ -15,16 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class CsvDataServiceImpl implements CsvDataService {
+    private int linesRead = 0; // Attribut pour suivre le nombre total de lignes lues
 
     public List<Transaction> readCsvData(String filePath) {
         List<Transaction> transactions = new ArrayList<>();
         int maxLines = 100000; // Limite de lignes à lire
-        int lineCount = 0; // Compteur de lignes
+        int lineCount = 0; // Compteur de lignes pour cette lecture
 
         try (Reader reader = Files.newBufferedReader(Paths.get(filePath));
-             CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build()) { // Skip header
+             CSVReader csvReader = new CSVReaderBuilder(reader)
+                     .withSkipLines(1 + linesRead) // Skip header et les lignes déjà lues
+                     .build()) {
 
             String[] nextRecord;
 
@@ -74,10 +74,10 @@ public class CsvDataServiceImpl implements CsvDataService {
 
                 transactions.add(transaction);
 
-                lineCount++; // Incrémenter le compteur de lignes après chaque lecture
+                lineCount++;
             }
 
-            transactions.stream().limit(10).forEach(System.out::println);
+            linesRead += lineCount; // Mise à jour de linesRead
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -85,5 +85,6 @@ public class CsvDataServiceImpl implements CsvDataService {
         return transactions;
     }
 }
+
 
 
