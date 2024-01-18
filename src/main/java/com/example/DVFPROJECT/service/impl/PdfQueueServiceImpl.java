@@ -15,12 +15,15 @@ import com.example.DVFPROJECT.service.PdfGenerationService;
 import com.example.DVFPROJECT.service.PdfQueueService;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
 public class PdfQueueServiceImpl implements PdfQueueService {
     private final BlockingQueue<List<TransactionDTO>> queue = new LinkedBlockingQueue<>();
     private final PdfGenerationService pdfGenerationService;
     private final NotificationService notificationService;
+    private final AtomicBoolean isProcessing = new AtomicBoolean(false);
+
 
     @Autowired
     public PdfQueueServiceImpl(PdfGenerationService pdfGenerationService, NotificationService notificationService) {
@@ -31,6 +34,9 @@ public class PdfQueueServiceImpl implements PdfQueueService {
     @Override
     public void addToQueue(List<TransactionDTO> transactions) {
         queue.add(transactions);
+        if (isProcessing.compareAndSet(false, true)) {
+            processQueue();
+        }
     }
 
     @Override
