@@ -11,7 +11,6 @@ public class TransactionMapper {
 
         transactionDTO.setIdMutation(transaction.getIdMutation());
         transactionDTO.setDateMutation(transaction.getDateMutation());
-        transactionDTO.setNumeroDisposition(transaction.getNumeroDisposition());
         transactionDTO.setNatureMutation(transaction.getNatureMutation());
         transactionDTO.setValeurFonciere(transaction.getValeurFonciere());
         transactionDTO.setAdresseNumero(transaction.getAdresseNumero());
@@ -19,11 +18,8 @@ public class TransactionMapper {
         transactionDTO.setAdresseNomVoie(transaction.getAdresseNomVoie());
         transactionDTO.setAdresseCodeVoie(transaction.getAdresseCodeVoie());
         transactionDTO.setCodePostal(transaction.getCodePostal());
-        transactionDTO.setCodeCommune(transaction.getCodeCommune());
         transactionDTO.setNomCommune(transaction.getNomCommune());
         transactionDTO.setCodeDepartement(transaction.getCodeDepartement());
-        transactionDTO.setAncienCodeCommune(transaction.getAncienCodeCommune());
-        transactionDTO.setAncienNomCommune(transaction.getAncienNomCommune());
         transactionDTO.setIdParcelle(transaction.getIdParcelle());
 
 
