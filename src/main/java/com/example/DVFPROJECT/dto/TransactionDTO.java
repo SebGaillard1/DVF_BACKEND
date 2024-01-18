@@ -22,6 +22,4 @@ public class TransactionDTO {
     private String ancienCodeCommune;
     private String ancienNomCommune;
     private String idParcelle;
-
-    // Getters et setters
 }

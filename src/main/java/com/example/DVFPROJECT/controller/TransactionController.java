@@ -43,8 +43,13 @@ public class TransactionController {
     }
 
     @GetMapping("/generatePdf")
-    public ResponseEntity<byte[]> generatePdf() {
-        byte[] pdfContent = pdfGenerationService.generatePdfReport();
+    public ResponseEntity<byte[]> generatePdf(
+            @RequestParam double latitude,
+            @RequestParam double longitude,
+            @RequestParam double radius) {
+        List<TransactionDTO> transactionsDTO = transactionService.findTransactionsInRadius(latitude, longitude, radius);
+        byte[] pdfContent = pdfGenerationService.generatePdfReport(transactionsDTO);
+
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
         headers.setContentDisposition(ContentDisposition.builder("attachment").filename("transactions_report.pdf").build());
