@@ -73,8 +73,7 @@ public class CsvDataServiceImpl implements CsvDataService {
                     transaction.setLongitude(Double.parseDouble(nextRecord[38]));
                     transaction.setLatitude(Double.parseDouble(nextRecord[39]));
                 } catch (NumberFormatException e) {
-                    // Gérer l'exception si la conversion échoue
-                    // Par exemple, vous pouvez définir une valeur par défaut ou ignorer la transaction
+                    System.out.print("Erreur de conversion de latitude/longitude");
                 }
 
                 transactions.add(transaction);

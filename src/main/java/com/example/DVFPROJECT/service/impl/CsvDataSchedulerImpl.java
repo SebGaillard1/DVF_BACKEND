@@ -14,7 +14,7 @@ public class CsvDataSchedulerImpl implements CsvDataScheduler {
     private final TransactionService transactionService;
 
     @Autowired
-    public CsvDataSchedulerImpl(CsvDataService csvDataService, TransactionService transactionService) {
+    public CsvDataSchedulerImpl(TransactionService transactionService) {
         this.transactionService = transactionService;
     }
 

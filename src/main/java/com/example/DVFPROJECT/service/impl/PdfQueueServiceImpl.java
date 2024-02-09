@@ -25,12 +25,12 @@ public class PdfQueueServiceImpl implements PdfQueueService {
     @Override
     public void addToQueue(List<TransactionDTO> transactions) {
         queue.add(transactions);
-        processQueue(); // Appeler directement processQueue ici ou selon une autre logique
+        processQueue();
     }
 
     @Override
     public void processQueue() {
-        while (!queue.isEmpty()) { // Modification pour vérifier si la file n'est pas vide
+        while (!queue.isEmpty()) {
             try {
                 List<TransactionDTO> transactions = queue.take();
                 byte[] pdfContent = pdfGenerationService.generatePdfReport(transactions);
