@@ -11,7 +11,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-@EnableAsync
 public class DvfProjectApplication implements CommandLineRunner {
 	@Autowired
 	private TransactionService transactionService;
