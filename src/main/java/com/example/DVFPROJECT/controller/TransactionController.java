@@ -1,13 +1,11 @@
 package com.example.DVFPROJECT.controller;
 
-import com.example.DVFPROJECT.business.Transaction;
 import com.example.DVFPROJECT.dto.TransactionDTO;
 import com.example.DVFPROJECT.service.NotificationService;
 import com.example.DVFPROJECT.service.PdfGenerationService;
 import com.example.DVFPROJECT.service.PdfQueueService;
 import com.example.DVFPROJECT.service.TransactionService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.*;
@@ -48,20 +46,6 @@ public class TransactionController {
         List<TransactionDTO> transactionsDTO = transactionService.findTransactionsInRadius(latitude, longitude, radius);
         return ResponseEntity.ok(transactionsDTO);
     }
-
-//    @GetMapping("/generatePdf")
-//    public ResponseEntity<byte[]> generatePdf(
-//            @RequestParam double latitude,
-//            @RequestParam double longitude,
-//            @RequestParam double radius) {
-//        List<TransactionDTO> transactionsDTO = transactionService.findTransactionsInRadius(latitude, longitude, radius);
-//        byte[] pdfContent = pdfGenerationService.generatePdfReport(transactionsDTO);
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_PDF);
-//        headers.setContentDisposition(ContentDisposition.builder("attachment").filename("transactions_report.pdf").build());
-//        return new ResponseEntity<>(pdfContent, headers, HttpStatus.OK);
-//    }
 
     @GetMapping("/generatePdf")
     public ResponseEntity<String> generatePdf(
