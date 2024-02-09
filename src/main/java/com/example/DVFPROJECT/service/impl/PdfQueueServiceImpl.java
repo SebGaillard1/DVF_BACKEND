@@ -6,11 +6,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.UUID;
 import com.example.DVFPROJECT.dto.TransactionDTO;
-import com.example.DVFPROJECT.service.NotificationService;
 import com.example.DVFPROJECT.service.PdfGenerationService;
 import com.example.DVFPROJECT.service.PdfQueueService;
 import java.util.concurrent.BlockingQueue;
@@ -21,14 +18,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class PdfQueueServiceImpl implements PdfQueueService {
     private final BlockingQueue<List<TransactionDTO>> queue = new LinkedBlockingQueue<>();
     private final PdfGenerationService pdfGenerationService;
-    private final NotificationService notificationService;
     private final AtomicBoolean isProcessing = new AtomicBoolean(false);
 
 
     @Autowired
-    public PdfQueueServiceImpl(PdfGenerationService pdfGenerationService, NotificationService notificationService) {
+    public PdfQueueServiceImpl(PdfGenerationService pdfGenerationService ) {
         this.pdfGenerationService = pdfGenerationService;
-        this.notificationService = notificationService;
     }
 
     @Override
@@ -55,13 +50,8 @@ public class PdfQueueServiceImpl implements PdfQueueService {
                     fos.write(pdfContent);
                 }
 
-                // Envoyer une notification globale
-                notificationService.sendGlobalNotification("Le PDF est prêt");
-
-            } catch (InterruptedException e) {
+            } catch (InterruptedException | IOException e) {
                 Thread.currentThread().interrupt();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }
