@@ -57,3 +57,9 @@ Incorporez ces paramètres dans les configurations de l'application ou utilisez-
 Pour visualiser et interagir avec l'API du projet, accédez à l'interface Swagger à l'URL suivante :
 
 - http://localhost:8080/swagger-ui/index.html
+
+## Lien du Trello
+
+Accédez au Trello à partir du lien suivant :
+
+- https://trello.com/b/mQJrPHYi/truc-de-java
